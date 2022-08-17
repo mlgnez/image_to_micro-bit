@@ -1,8 +1,12 @@
 import microbit
+from io import BytesIO
+
 from PIL import Image as PILImage
 from numpy import *
+import requests
 
-pil_img = PILImage.open('5x5.png')
+response = requests.get("https://raw.githubusercontent.com/mlgnez/image_to_micro-bit/main/5x5.png")
+pil_img = PILImage.open(BytesIO(response.content))
 
 img = list(pil_img.getdata())
 bet_img = []
@@ -39,6 +43,6 @@ microimage = microbit.Image(better_img[0],better_img[1],better_img[2],better_img
 while True:
 
     microbit.display.show()
-    #if microbit.button_a.is_pressed(): #scroll to another image
-    #if microbit.button_b.is_pressed(): #scroll to another image
+    if microbit.button_a.is_pressed(): #scroll to another image
+    if microbit.button_b.is_pressed(): #scroll to another image
     #microbit.sleep(2000)
