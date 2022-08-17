@@ -1,6 +1,7 @@
 import microbit
 from io import BytesIO
 
+import microbit
 from PIL import Image as PILImage
 from numpy import *
 import requests
@@ -14,35 +15,37 @@ better_img = []
 
 for x in range(int(len(img))):
     if img[x][3] != 0:
-        bet_img.append(int(img[x][3] / 28))
+        add_up = 0
+        for x2 in range(4):
+            add_up += int(img[x][x2-1])
+        bet_img.append(int(img[x][3] / (add_up / 9)))
     else:
         bet_img.append(0)
 
 add_to = ""
-timesrun = 0
+times_run = 0
 for x in range(int(len(bet_img) / 5)):
 
     print(add_to)
     for x2 in range(int(len(bet_img) / 5)):
         add_to += str(bet_img[((x * 5) + x2)])
         print(add_to)
-    timesrun += 1
+    times_run += 1
     if add_to != "":
-        if timesrun != 5:
-            better_img.append(add_to + ":")
-        else:
+        if times_run == 5:
             better_img.append(add_to)
-    add_to = ""
+        else:
+            add_to += ":"
 
 print(img)
 print(bet_img)
 print(better_img)
 
-microimage = microbit.Image(better_img[0],better_img[1],better_img[2],better_img[3],better_img[4])
+microimage = microbit.Image(better_img[0])
 
 while True:
 
-    microbit.display.show()
-    if microbit.button_a.is_pressed(): #scroll to another image
-    if microbit.button_b.is_pressed(): #scroll to another image
-    #microbit.sleep(2000)
+    microbit.display.show(microimage)
+    #if microbit.button_a.is_pressed(): #scroll to another image
+    #if microbit.button_b.is_pressed(): #scroll to another image
+    microbit.sleep(2000)
