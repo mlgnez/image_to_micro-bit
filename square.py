@@ -39,6 +39,11 @@ print(img)
 print(bet_img)
 print(better_img)
 
-fp = open('better_img.txt', 'w')#'x' with be mad if file already exists, use 'w' if file already exists. im using 'x' because i only want to copy 1 file over
-fp.write(better_img[0])
+fp = open('better_img.txt', 'r')#'x' with be mad if file already exists, use 'w' if file already exists. im using 'x' because i only want to copy 1 file over
+content = fp.readlines()
 fp.close()
+
+fp2 = open('better_img.txt', 'w')#'x' with be mad if file already exists, use 'w' if file already exists. im using 'x' because i only want to copy 1 file over
+fp2.writelines(content)
+fp2.write("\n" + better_img[0])
+fp2.close()
