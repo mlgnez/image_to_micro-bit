@@ -1,7 +1,5 @@
-import microbit
 from io import BytesIO
 
-import microbit
 from PIL import Image as PILImage
 from numpy import *
 import requests
@@ -41,11 +39,6 @@ print(img)
 print(bet_img)
 print(better_img)
 
-microimage = microbit.Image(better_img[0])
-
-while True:
-
-    microbit.display.show(microimage)
-    #if microbit.button_a.is_pressed(): #scroll to another image
-    #if microbit.button_b.is_pressed(): #scroll to another image
-    microbit.sleep(2000)
+fp = open('better_img.txt', 'w')#'x' with be mad if file already exists, use 'w' if file already exists. im using 'x' because i only want to copy 1 file over
+fp.write(better_img[0])
+fp.close()
